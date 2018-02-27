@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue实例</title>
+</head>
+
+<body>
+    <h1>vue-day1</h1>
+    <hr>
+    <ul id="app">
+        <li>{{msg}}</li>
+        <li v-if="isLogin">hello Mr dou</li>
+        <li v-else>请登陆</li>
+        <li v-show="Math.random()>0.5">随机数大于0.5展示v-show</li>
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
+        <li v-for="i in arr">{{i}}</li>
+        <li v-for="(i,index) in sortAge">{{index}}-{{i.name}}:{{i.age}}</li>
+        <li>
+            <span>{{msg}}</span>
+            <br>
+            <span v-text="msg"></span>
+        </li>
+        <li>{{dom}}</li>
+        <li v-html="dom"></li>
+        <--不建议使用，防止xss攻击-->
+            <h3>总分：{{count}}</h3>
+            <li>
+                <button v-on:click="up">加分</button>
+                <button @click="down">扣分</button>
+                <input type="text" @keyup.enter="add" v-model="sorts">
+            </li>
+
+    </ul>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                msg: "this is a message! test again!",
+                isLogin: true,
+                type: "a",
+                arr: ["宝马", "奥迪", "奔驰"],
+                age: [{ name: "小李", age: "18" }, { name: "小明", age: "8" }, { name: "小张", age: "28" }],
+                dom: "<h1>插入dom</h1>",
+                count: 0
+            },
+            computed: {
+                sortAge: function () {
+                    return sortItem(this.age, "age")
+                }
+            },
+            methods: {
+                up: function () {
+                     this.count++;
+                },
+                down: function () {
+                     this.count--;
+                     this.count>0?this.count:this.count=0
+                },
+                add:function(){
+                   this.count = this.count+parseInt(this.sorts)
+                }
+            }
+
+        })
+        function sortItem(arr, key) {
+            return arr.sort(function (a, b) {
+                return a[key] - b[key]
+            })
+        }
+    </script>
+</body>
+
+</html>

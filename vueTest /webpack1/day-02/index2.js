@@ -1,0 +1,1 @@
+document.write("<h3>多入口文件2</h3>")

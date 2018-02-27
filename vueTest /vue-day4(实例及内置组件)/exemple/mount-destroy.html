@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用</title>
+</head>
+
+<body>
+
+    <hr>
+    <div id="app">
+
+        <div>当前温度：
+            <p style="color:red">{{temputer}}</p>
+        </div>
+        <div class="temp" ></div>
+        <button id = "delete" onclick = "deleted()">销毁实例化的组件</button>
+        <button onclick = "forceUpdate()">强更</button>
+        <button onclick="changeData()">更新数据</button>
+        <br>
+        <button @click="uprise">升温</button>
+        <button @click="decreace">降温</button>
+    </div>
+    
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                temputer: 10,
+            },
+            methods: {
+                uprise: function () {
+                    this.temputer += 2;
+                    console.log(this.temputer)
+                },
+                decreace: function () {
+                    this.temputer -= 2
+                }
+            },
+            mounted:function(){
+                $('#app').find("p").append("<span>度</span>")
+            },
+            updated:function(){
+                console.log("原生的更新")
+            },
+           
+
+        });
+        var po = Vue.extend({
+            template:"<h3>这是{{msg}}</h3>",
+            data:function(){
+               return { msg:"模版组件"}
+            },
+            updated:function(){
+                console.log("触发更新")
+            },
+            beforeDestroy:function(){
+                console.log('temp销毁之前');
+            },
+            destroyed:function(){
+                console.log('temp销毁之后')
+            }
+        });
+       var temp = new po().$mount(".temp");
+        function deleted(){
+            temp.$destroy();
+        }
+        function forceUpdate(){
+            temp.$forceUpdate();
+        }
+        function changeData(){
+            temp.msg= "我是改变的数据"//触发updated钩子函数
+            //触发更新后回调
+            temp.$nextTick(function(){
+                console.log("更新数据后")
+            })
+            
+        }
+
+        
+
+    </script>
+</body>
+
+</html>

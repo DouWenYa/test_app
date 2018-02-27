@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-directive</title>
+</head>
+
+<body>
+    <hr>
+    <div id="app">
+        <p :style="color">{{num}}</p>
+        <!-- <button @click="add">增加</button> -->
+        <p v-for='(item,i) in arr'>{{i}}-{{item}}</p>
+    </div>
+    <button onclick="add()">增加</button>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+    var putData={
+                msg: "hello",
+                one: "please",
+                color: {color:"red"},
+                num:1,
+                arr:["lucy","lily","lilei"]
+            };
+            function add(){
+                //putData.num++;
+                //app.num++;
+                //Vue.set(putData,"num",2)
+                //Vue.set(app,"num",2)
+                //putData.arr[2]="hanmei";//模版未更新；
+                Vue.set(app.arr,2,"hanmei")
+
+            }
+    var app = new Vue({
+            el: "#app",
+            data: putData,
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+          
+            }
+        })
+
+    </script>
+</body>
+
+</html>

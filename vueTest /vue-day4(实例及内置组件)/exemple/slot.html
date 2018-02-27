@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot</title>
+</head>
+
+<body>
+
+    <hr>
+    <div id="app">
+        <temp>
+            <span slot="blog">{{infoData.blogUrl}}</span>
+            <span slot='sex'>{{infoData.sex}}</span>
+            <span slot='hobbit'>{{infoData.hobbit}}</span>
+        </temp>
+    </div>
+    <script src="../assets/js/vue.js"></script>
+    <template id="conp">
+        <div>
+            <p>个人博客：<slot name="blog"></slot></p>
+            <p>性别：<slot name="sex"></slot></p>
+            <p>爱好：<slot name="hobbit"></slot></p>
+        </div>
+    </template>
+    <script>
+        var info = {
+            template:"#conp"
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                temputer: 10,
+                infoData:{
+                    blogUrl:'www.dwenya.top',
+                    sex:"male",
+                    hobbit:"table-tenis"
+                }
+            },
+            components:{
+                "temp":info,
+            }
+            
+
+        })
+
+    </script>
+</body>
+
+</html>

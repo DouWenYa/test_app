@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+</head>
+
+<body>
+    <hr>
+    <div id="app1">
+        <hello></hello>
+    </div>
+    <div id="app2">
+        <hello></hello>
+    </div>
+    <div id="app3">
+        <hehe data-app="haha"></hehe>
+        <haha :comps="num"></haha>
+    </div>
+    <div id="app4">
+        <big></big>
+    </div>
+    <div id="app5">
+            <component :is="which"></component>
+            <button @click=change>切换</button>
+        </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        Vue.component("hello", {
+            template: "<h3>这是全局组件</h3>"
+        })
+        var app1 = new Vue({
+            el: "#app1",
+            data: {
+                num: 'a',
+                list: ["篮球", "足球", "乒乓球"]
+
+            },
+
+        });
+        var app2 = new Vue({
+            el: "#app2",
+            data: {
+                num: 'a',
+                list: ["篮球", "足球", "乒乓球"]
+            },
+        });
+        var app3 = new Vue({
+            el: "#app3",
+            data: {
+                num: 'a',
+                list: ["篮球", "足球", "乒乓球"]
+
+            },
+            components: {
+                'hehe': {
+                    template: "<h3>这是局部组件{{dataApp}}</h3>",
+                    props: ["dataApp"]
+                },
+                'haha': {
+                    template: "<h3>这是 {{comps}} 局部组件</h3>",
+                    props: ["comps"]
+                }
+            }
+
+
+
+        });
+        var Small = {
+            template: `<h3>这是包含在big内的small组件</h3>`
+        };
+        var Big = {
+            template: `<div>
+            <h3>这是big内</h3>
+            <smalls></smalls>
+            </div>`,
+            components: {
+                'smalls': Small,
+            }
+        }
+        var app4 = new Vue({
+            el: "#app4",
+            data: {
+                num: 'a',
+                list: ["篮球", "足球", "乒乓球"]
+            },
+            components: {
+                'big': Big,
+
+            }
+        });
+        var temp1 = {
+            template: `<h3 style="color:red">这是组件模版1</h3>`
+        }
+        var temp2 = {
+            template: `<h3 style="color:green">这是组件模版2</h3>`
+        }
+        var temp3 = {
+            template: `<h3 style="color:purple">这是组件模版3</h3>`
+        }
+        var app5 = new Vue({
+            el: "#app5",
+            data: {
+                num: 'a',
+                list: ["篮球", "足球", "乒乓球"],
+                which:'temp1'
+            },
+            components: {
+                'temp1': temp1,
+                'temp2': temp2,
+                'temp3': temp3,
+
+            },
+            methods:{
+                change:function(){
+                    if (this.which=="temp1") {
+                        this.which="temp2"
+                    }else if (this.which=='temp2') {
+                        this.which="temp3"
+                    }else{
+                        this.which="temp1"
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

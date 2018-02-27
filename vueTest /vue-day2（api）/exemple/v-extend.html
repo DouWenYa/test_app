@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-extend</title>
+</head>
+
+<body>
+    <hr>
+    <div id="set"></div>
+    <set></set>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+       var temp =  Vue.extend({
+           template:"<p><a :href='baseUrl'>{{message}}</a></p>",
+           data:function(){
+               return {
+                   baseUrl:"https://www.baidu.com",
+                   message:"this is a template!"
+               }
+           }
+       })
+       new temp().$mount("#set")
+       new temp().$mount("set")
+
+
+    </script>
+</body>
+
+</html>

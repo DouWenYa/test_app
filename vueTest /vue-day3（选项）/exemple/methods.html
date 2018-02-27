@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>methods</title>
+</head>
+
+<body>
+    
+    <hr>
+   <div id="app">
+    <p style="color:red">{{price}}</p>
+    <button @click="add(5,$event)">增加</button>
+    <p><btn @click.native="add(5)"></btn></p>
+    <p><button onclick="app.add(5)">外部调用增加方法</button></p>
+   </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        var btns={
+            template:`<button>组件调用增加方法</button>`
+        }
+       var app = new Vue({
+           el:"#app",
+           data:{
+               price:100,
+               
+           },
+           components:{
+            "btn":btns
+           },
+           methods:{
+               add:function(num,e){
+                if(num&&(typeof num=='number')){
+                    this.price+=num;
+                    console.log("加n",this.price)
+                }else{
+                    this.price++
+                    console.log("加一",this.price)
+                }
+                console.log("鼠标事件",e)
+               }
+           }
+       }) 
+    </script>
+</body>
+
+</html>

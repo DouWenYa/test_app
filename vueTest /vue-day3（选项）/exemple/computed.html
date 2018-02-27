@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed</title>
+</head>
+
+<body>
+    
+    <hr>
+   <div id="app">
+    <p style="color:red">{{newPrice}}</p>
+    <button @click="add">增加</button>
+   </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+       var app = new Vue({
+           el:"#app",
+           data:{
+               price:100,
+               prices:''
+           },
+           computed:{
+               newPrice:function(){
+                   return this.prices = '$'+this.price+'.00'
+               }
+           },
+           methods:{
+               add:function(){
+                return this.price++;
+                //console.log(this.price,app)
+               }
+           }
+       }) 
+    </script>
+</body>
+
+</html>

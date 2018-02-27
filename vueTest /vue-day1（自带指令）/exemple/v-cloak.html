@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue</title>
+</head>
+
+<body>
+    <hr>
+    <div id="app">
+        <p>{{msg}}</p>
+        <p v-pre>{{msg}}</p>
+        <!--不对{{}}进行渲染 -->
+        <p v-cloak>{{msg}}</p> 
+        <!--防止未渲染数据显示代码 -->
+        <span v-once>{{one}}</span>
+        <input type="text" v-model="one">
+
+    </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                msg: "hello",
+                one: "please",
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed</title>
+</head>
+
+<body>
+    
+    <hr>
+   <div id="app">
+    
+    <div>当前温度：<p style="color:red">{{temputer}}</p></div>
+    <div>穿衣指数：{{suggest}}</div>
+    <button @click="uprise">升温</button>
+    <button @click="decreace">降温</button>
+   </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        var suggests = ["衬衣裙子",'羽绒服秋裤','短袖']
+       var app = new Vue({
+           el:"#app",
+           data:{
+               temputer:10,
+               suggest:suggests[0]
+           },
+        methods:{
+            uprise:function(){
+                this.temputer+=2
+            },
+            decreace:function(){
+                this.temputer-=2
+            }
+        },
+        watch:{
+            temputer:function(newt,old){
+                if(parseInt(newt)>=23){
+                    this.suggest=suggests[2]
+                }else if(parseInt(newt)<=23&&parseInt(newt)>0){
+                    this.suggest=suggests[0]
+                }else{
+                    this.suggest=suggests[1]
+                }
+            }
+        }
+           
+       })
+       app.$watch("temputer",function(){}) 
+    </script>
+</body>
+
+</html>

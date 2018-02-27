@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model</title>
+    <style>
+            .classA {
+                color: red;
+            }
+    
+            .classB {
+                color: aquamarine;
+            }
+            .classC{
+                background-color: #f2f2f2;
+            }
+        </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <span>输入框内容：{{value}}</span>
+            <input type="text" v-model="value">
+            <br>
+            <input type="text" v-model.lazy="value">
+            <!-- 失焦改变 -->
+            <input type="text" v-model.number="value">
+            <!--格式化为number -->
+            <input type="text" v-model.trim="value">
+            <!-- 去除首位空格 -->
+        </div>
+        <hr>
+        <div>
+            <h3>多选按钮绑定一个值</h3>
+            <input type="checkbox" id="once" v-model="isTrue">
+            <label for='once'>{{isTrue?"登录":"注册"}}</label>
+        </div>
+        <hr>
+        <div>
+            <h3>多选按钮绑定多个值</h3>
+            <input type="checkbox" id="one" v-model="select" value="hello">
+            <label for='one'>hello</label>
+            <input type="checkbox" id="two" v-model="select" value="world">
+            <label for='two'>world</label>
+            <input type="checkbox" id="three" v-model="select" value="!">
+            <label for='three'>!</label>
+            <h4>{{select}}</h4>
+        </div>
+        <hr>
+        <div>
+            <h3>v-bind</h3>
+            <img v-bind:src="imgSrc" alt="" width="200" height="100">
+            <img :src="imgSrc" alt="" width="200" height="100">
+            <div>
+                <p :class="className">绑定样式1</p>
+                <p :class="{classB:isChange}">绑定样式2</p>
+                <input type="checkbox" name="" id="two" v-model="isChange">
+                <label for="two">{{isChange?"改变颜色":"默认颜色"}}</label>
+                <p :class="[classA,classC]">绑定样式3</p>
+                <p :class="isChange?classC:classA">绑定样式4</p>
+                <p :style="{color:col,fontSize:font}">绑定样式5</p>
+                <p :style="styleObj">绑定样式6</p>
+                
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                value: "请输入...",
+                isTrue: true,
+                select: [],
+                imgSrc: "../assets/image/car.png",
+                classA:"classA",
+                classC:"classC",
+                className: "classA",
+                isChange:true,
+                //:"classB",
+                col:"green",
+                font:"16px",
+                styleObj:{
+                    color:"gold",
+                    fontSize:"18px"
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

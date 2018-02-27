@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>extends</title>
+</head>
+
+<body>
+
+    <hr>
+    <div id="app">
+
+        <div>当前温度：
+            <p style="color:red">${temputer}</p>
+        </div>
+        <!-- <div>穿衣指数：{{suggest}}</div> -->
+        <button @click="uprise">升温</button>
+        <button @click="decreace">降温</button>
+    </div>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+         //混入局部方法
+        var add = {
+            updated:function () {
+                console.log('我是扩展的的方法'+this.temputer)
+            }
+        }
+        
+        var app = new Vue({
+            el: "#app",
+            data: {
+                temputer: 10,
+            },
+            methods: {
+                uprise: function () {
+                    this.temputer += 2
+                },
+                decreace: function () {
+                    this.temputer -= 2
+                }
+            },
+            updated:function(){
+                console.log("原生的更新")
+            },
+            extends:add,
+            //更改变量渲染方式
+            delimiters:["${","}"]
+
+        })
+
+    </script>
+</body>
+
+</html>

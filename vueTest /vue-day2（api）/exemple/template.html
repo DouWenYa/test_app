@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template模版</title>
+</head>
+
+<body>
+    <hr>
+    <div id="app">
+       <template id="second">
+           <h3>this is {{num}} template</h3>
+
+        </template>
+    </div>
+    <script type="x-template" id="third">
+            <h3>this is {{num}} template</h3>
+
+    </script>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+
+    var app = new Vue({
+            el: "#app",
+            data: {
+                num:'a',
+                list:["篮球","足球","乒乓球"]
+            
+            },
+            //template:`<h3>this is {{num}} template</h3>`
+         template:"#second"
+            //template:"#third"
+        })
+
+    </script>
+</body>
+
+</html>
